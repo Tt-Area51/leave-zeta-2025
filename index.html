@@ -18,20 +18,76 @@
             color: #333;
             margin-bottom: 20px;
         }
+        .button-container {
+            margin-bottom: 20px;
+        }
+        .toggle-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .toggle-button:hover {
+            background-color: #0056b3;
+        }
+        .iframe-container {
+            position: relative;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>ฟอร์มลางาน ZETA 2025</h1>
-        <iframe 
-            class="airtable-embed" 
-            src="https://airtable.com/embed/appbm1UnIjB8ljgSH/pag6Lw8HEHjdLvbEz/form" 
-            frameborder="0" 
-            onmousewheel="" 
-            width="100%" 
-            height="800" 
-            style="background: transparent; border: 1px solid #ccc;">
-        </iframe>
+        <div class="button-container">
+            <button class="toggle-button" onclick="toggleView()">ดูข้อมูลการลางาน</button>
+        </div>
+        <div class="iframe-container">
+            <iframe 
+                id="formFrame"
+                class="airtable-embed" 
+                src="https://airtable.com/embed/appbm1UnIjB8ljgSH/pag6Lw8HEHjdLvbEz/form" 
+                frameborder="0" 
+                onmousewheel="" 
+                width="100%" 
+                height="800" 
+                style="background: transparent; border: 1px solid #ccc;">
+            </iframe>
+            <iframe 
+                id="tableFrame"
+                class="airtable-embed" 
+                src="https://airtable.com/embed/appbm1UnIjB8ljgSH/shr1G9FYrpz97nLKX?viewControls=on" 
+                frameborder="0" 
+                onmousewheel="" 
+                width="100%" 
+                height="800" 
+                style="background: transparent; border: 1px solid #ccc; display: none;">
+            </iframe>
+        </div>
     </div>
+
+    <script>
+        let showingForm = true;
+        const formFrame = document.getElementById('formFrame');
+        const tableFrame = document.getElementById('tableFrame');
+        const toggleButton = document.querySelector('.toggle-button');
+
+        function toggleView() {
+            if (showingForm) {
+                formFrame.style.display = 'none';
+                tableFrame.style.display = 'block';
+                toggleButton.textContent = 'กลับไปหน้าฟอร์ม';
+            } else {
+                formFrame.style.display = 'block';
+                tableFrame.style.display = 'none';
+                toggleButton.textContent = 'ดูข้อมูลการลางาน';
+            }
+            showingForm = !showingForm;
+        }
+    </script>
 </body>
 </html>
